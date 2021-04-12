@@ -442,23 +442,29 @@ summary {
   
   zipcode
 }</code></pre>
-<p>Testing the code</p>
-<pre class="r"><code>normalize_zip(
-  c(&quot;1&quot;, &quot;10&quot;, &quot;101&quot;, &quot;3420&quot;, &quot;34205&quot;, &quot;943032&quot;, &quot;2340594&quot;, &quot;23495420&quot;, &quot;999999999&quot;, NA)
-)</code></pre>
-<pre><code>##  [1] &quot;00001&quot; &quot;00010&quot; &quot;00101&quot; &quot;03420&quot; &quot;34205&quot; &quot;00094&quot; &quot;00234&quot; &quot;02349&quot; &quot;99999&quot;
-## [10] NA</code></pre>
-<pre class="r"><code>normalize_zip(
-  c(&quot;1&quot;, &quot;10&quot;, &quot;101&quot;, &quot;3420&quot;, &quot;34205&quot;, &quot;3-4205&quot;, &quot;94-3032&quot;, &quot;234-0594&quot;, &quot;2349-5420&quot;, &quot;99999-9999&quot;, NA)
-)</code></pre>
-<pre><code>##  [1] &quot;00001&quot; &quot;00010&quot; &quot;00101&quot; &quot;03420&quot; &quot;34205&quot; &quot;00003&quot; &quot;00094&quot; &quot;00234&quot; &quot;02349&quot;
-## [10] &quot;99999&quot; NA</code></pre>
-<pre class="r"><code>normalize_zip(
-  c(1, 10, 101, 3420, 34205, 943032, 2340594, 23495420, 999999999, NA)
-)</code></pre>
-<pre><code>##  [1] &quot;00001&quot; &quot;00010&quot; &quot;00101&quot; &quot;03420&quot; &quot;34205&quot; &quot;00094&quot; &quot;00234&quot; &quot;02349&quot; &quot;99999&quot;
-## [10] NA</code></pre>
-<pre class="r"><code># these should generate errors
+<p>Testing the code.</p>
+<pre class="r"><code>testthat::expect_equal(
+  normalize_zip(
+    c(&quot;1&quot;, &quot;10&quot;, &quot;101&quot;, &quot;3420&quot;, &quot;34205&quot;, &quot;943032&quot;, &quot;2340594&quot;, &quot;23495420&quot;, &quot;999999999&quot;, NA)
+  ),
+  c(&quot;00001&quot;, &quot;00010&quot;, &quot;00101&quot;, &quot;03420&quot;, &quot;34205&quot;, &quot;00094&quot;, &quot;00234&quot;, &quot;02349&quot;, &quot;99999&quot;, NA)
+)
+
+testthat::expect_equal(
+  normalize_zip(
+    c(&quot;1&quot;, &quot;10&quot;, &quot;101&quot;, &quot;3420&quot;, &quot;34205&quot;, &quot;3-4205&quot;, &quot;94-3032&quot;, &quot;234-0594&quot;, &quot;2349-5420&quot;, &quot;99999-9999&quot;, NA)
+  ),
+  c(&quot;00001&quot;, &quot;00010&quot;, &quot;00101&quot;, &quot;03420&quot;, &quot;34205&quot;, &quot;00003&quot;, &quot;00094&quot;, &quot;00234&quot;, &quot;02349&quot;, &quot;99999&quot;, NA)
+)
+
+testthat::expect_equal(
+  normalize_zip(
+    c(1, 10, 101, 3420, 34205, 943032, 2340594, 23495420, 999999999, NA)
+  ),
+  c(&quot;00001&quot;, &quot;00010&quot;, &quot;00101&quot;, &quot;03420&quot;, &quot;34205&quot;, &quot;00094&quot;, &quot;00234&quot;, &quot;02349&quot;, &quot;99999&quot;, NA)
+)
+
+# check that wrong input generates errors
 testthat::expect_error(
   normalize_zip(NULL),
   &quot;input must be character or numeric&quot;
