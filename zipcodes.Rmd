@@ -1,0 +1,143 @@
+---
+title: "Convert zip codes to fips codes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load the required packages.
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(here)
+library(zipcodeR)
+
+options(tigris_use_cache = TRUE)
+```
+
+Obtain raw data.
+
+```{r}
+# conversion table from state names to state codes
+state_lookup <- read_csv(here("state_lookup.csv"))
+
+# download all US counties from US Census and clean
+counties_raw <- get_acs(geography = "county", variables = "B19013_001")
+
+counties <- counties_raw %>%
+  extract(NAME, into = c("county", "state"), "(.*), (.*)") %>%
+  rename(FIPS = GEOID) %>%
+  left_join(state_lookup) %>%
+  mutate(
+    # always spell city with capital C
+    county = sub("city", "City", county)
+  )
+```
+
+The following code needs to be in a separate chunk so we can suppress all the output it generates.
+
+```{r eval = FALSE}
+# get info on all available zip codes
+zip2county_raw <- reverse_zipcode(sprintf("%05i", 1:99999)) %>%
+  select(zipcode, county, state_code = state)
+```
+
+```{r include = FALSE}
+# get info on all available zip codes
+zip2county_raw <- reverse_zipcode(sprintf("%05i", 1:99999)) %>%
+  select(zipcode, county, state_code = state)
+```
+
+The county names between the two data sources differ somewhat. So we need to fix up the zip code lookup table so it matches the naming/spelling in the counties table.
+
+```{r}
+zip2county <- zip2county_raw %>%
+  mutate(
+    # always spell city with capital C
+    county = sub("city", "City", county)
+  ) %>%
+  mutate(
+    # manual fix-up of various spelling and naming mistakes
+    county = case_when(
+      # first we do obvious misspellings
+      county == "St Clair County" & state_code == "AL" ~ "St. Clair County",
+      county == "Municipality of Anchorage" & state_code == "AK" ~ "Anchorage Municipality",
+      county == "City and Borough of Juneau" & state_code == "AK" ~ "Juneau City and Borough",
+      county == "Dekalb County" & state_code == "GA" ~ "DeKalb County",
+      county == "Dupage County" & state_code == "IL" ~ "DuPage County",
+      county == "Mchenry County" & state_code == "IL" ~ "McHenry County",
+      county == "Mclean County" & state_code == "IL" ~ "McLean County",
+      county == "La Salle County" & state_code == "IL" ~ "LaSalle County",
+      county == "St Bernard Parish" & state_code == "LA" ~ "St. Bernard Parish",
+      county == "St Mary Parish" & state_code == "LA" ~ "St. Mary Parish",
+      county == "St Tammany Parish" & state_code == "LA" ~ "St. Tammany Parish",
+      county == "St Martin Parish" & state_code == "LA" ~ "St. Martin Parish",
+      county == "St Landry Parish" & state_code == "LA" ~ "St. Landry Parish",
+      county == "St James Parish" & state_code == "LA" ~ "St. James Parish",
+      county == "La Salle Parish" & state_code == "LA" ~ "LaSalle Parish",
+      county == "St Mary's County" & state_code == "MD" ~ "St. Mary's County",
+      
+      county == "St Louis County" & state_code == "MN" ~ "St. Louis County",
+      county == "St Louis County" & state_code == "MO" ~ "St. Louis County",
+      county == "St Francois County" & state_code == "MO" ~ "St. Francois County",
+      
+      county == "Doa Ana County" & state_code == "NM" ~ "Doña Ana County",
+      county == "Dona Ana County" & state_code == "NM" ~ "Doña Ana County",
+      county == "Mckinley County" & state_code == "NM" ~ "McKinley County",
+      
+      county == "St Lawrence County" & state_code == "NY" ~ "St. Lawrence County",
+      
+      county == "Mclennan County" & state_code == "TX" ~ "McLennan County",
+      county == "De Witt County" & state_code == "TX" ~ "DeWitt County",
+      
+      county == "James City" & state_code == "VA" ~ "James City County",
+      county == "Charles City" & state_code == "VA" ~ "Charles City County",
+            
+      county == "San Juan County" & state_code == "PR" ~ "San Juan Municipio",
+      county == "San Juan" & state_code == "PR" ~ "San Juan Municipio",
+
+      # now more complicated cases, regions that were renamed or otherwise changed
+            
+      county == "Wade Hampton Census Area" & state_code == "AK" ~ "Kusilvak Census Area",
+
+      # the following two are not entirely correct, regions overlap but aren't exactly the same between Petersburg Borough and Prince of Wales-Hyder Census area
+      county == "Petersburg Census Area" & state_code == "AK" ~ "Petersburg Borough",
+      county == "Prince of Wales-Outer Ketchikan Borough" & state_code == "AK" ~ "Prince of Wales-Hyder Census Area",
+
+      county == "Shannon County" & state_code == "SD" ~ "Oglala Lakota County",
+
+      # everything else carries over unchanged
+      TRUE ~ county
+    )
+  )
+
+```
+
+Now we can join the two tables by county and state and see how many cases remain unresolved.
+
+```{r}
+zip2fips <- zip2county %>%
+  left_join(counties, by = c("county", "state_code")) %>%
+  select(zipcode, county, state, state_code, FIPS)
+
+unresolved <- zip2fips %>%
+  filter(is.na(FIPS))
+
+# number of unresolved cases
+nrow(unresolved)
+
+# unresolved cases with name
+filter(unresolved, county != "")
+
+# unresolved cases without name
+filter(unresolved, county == "")
+```
+
+Save output file.
+
+```{r}
+write_csv(zip2fips, here("zip2fips.csv"))
+```
