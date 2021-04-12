@@ -51,7 +51,7 @@ zip2county_raw <- reverse_zipcode(sprintf("%05i", 1:99999)) %>%
   select(zipcode, county, state_code = state)
 ```
 
-The county names between the two data sources differ somewhat. So we need to fix up the zip code lookup table so it matches the naming/spelling in the counties table.
+The county names between the two data sources differ somewhat. So we need to fix up the zip code lookup table so it matches the naming/spelling in the counties table. Also, there are cases where no county info is available at all, and we can fix that manually as well.
 
 ```{r}
 zip2county <- zip2county_raw %>%
@@ -110,6 +110,15 @@ zip2county <- zip2county_raw %>%
       county == "Shannon County" & state_code == "SD" ~ "Oglala Lakota County",
 
       # everything else carries over unchanged
+      TRUE ~ county
+    )
+  ) %>%
+  mutate(
+    # fix up a few more cases manually that aren't correct in the raw database
+    county = case_when(
+      zipcode == "30645" ~ "Oconee County",
+      zipcode == "41025" ~ "Kenton County",
+      zipcode == "98082" ~ "Snohomish County",
       TRUE ~ county
     )
   )
