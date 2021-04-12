@@ -11,7 +11,7 @@
 
 
 
-<title>Convert zip codes to fips codes</title>
+<title>Convert zip codes to FIPS codes</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -384,53 +384,42 @@ summary {
 
 
 
-<h1 class="title toc-ignore">Convert zip codes to fips codes</h1>
+<h1 class="title toc-ignore">Convert zip codes to FIPS codes</h1>
 
 </div>
 
 
 <p>Load the required packages.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.3.9000     ✓ purrr   0.3.4     
-## ✓ tibble  3.0.6          ✓ dplyr   1.0.3     
-## ✓ tidyr   1.1.2          ✓ stringr 1.4.0     
-## ✓ readr   1.4.0          ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(here)
+library(zipcodeR)</code></pre>
+<p>Obtain county data from US Census and cache.</p>
 <pre class="r"><code>library(tidycensus)
-library(here)</code></pre>
-<pre><code>## here() starts at /Users/clauswilke/github/zipcodes</code></pre>
-<pre class="r"><code>library(zipcodeR)
+options(tigris_use_cache = TRUE)
 
-options(tigris_use_cache = TRUE)</code></pre>
+if (FALSE) {
+  # download all US counties from US Census
+  counties_raw &lt;- get_acs(geography = &quot;county&quot;, variables = &quot;B19013_001&quot;)
+  write_csv(counties_raw, here(&quot;data&quot;, &quot;counties_census_data.csv&quot;))
+}</code></pre>
 <p>Obtain raw data.</p>
 <pre class="r"><code># conversion table from state names to state codes
-state_lookup &lt;- read_csv(here(&quot;state_lookup.csv&quot;))</code></pre>
-<pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   state = col_character(),
-##   state_code = col_character()
-## )</code></pre>
-<pre class="r"><code># download all US counties from US Census and clean
-counties_raw &lt;- get_acs(geography = &quot;county&quot;, variables = &quot;B19013_001&quot;)</code></pre>
-<pre><code>## Getting data from the 2015-2019 5-year ACS</code></pre>
-<pre class="r"><code>counties &lt;- counties_raw %&gt;%
+state_lookup &lt;- read_csv(here(&quot;data&quot;, &quot;state_lookup.csv&quot;))
+
+# read in census data and clean
+counties &lt;- read_csv(here(&quot;data&quot;, &quot;counties_census_data.csv&quot;)) %&gt;%
   extract(NAME, into = c(&quot;county&quot;, &quot;state&quot;), &quot;(.*), (.*)&quot;) %&gt;%
   rename(FIPS = GEOID) %&gt;%
-  left_join(state_lookup) %&gt;%
+  left_join(state_lookup, by = &quot;state&quot;) %&gt;%
   mutate(
     # always spell city with capital C
     county = sub(&quot;city&quot;, &quot;City&quot;, county)
   )</code></pre>
-<pre><code>## Joining, by = &quot;state&quot;</code></pre>
 <p>The following code needs to be in a separate chunk so we can suppress all the output it generates.</p>
 <pre class="r"><code># get info on all available zip codes
 zip2county_raw &lt;- reverse_zipcode(sprintf(&quot;%05i&quot;, 1:99999)) %&gt;%
   select(zipcode, county, state_code = state)</code></pre>
-<p>The county names between the two data sources differ somewhat. So we need to fix up the zip code lookup table so it matches the naming/spelling in the counties table.</p>
+<p>The county names between the two data sources differ somewhat. So we need to fix up the zip code lookup table so it matches the naming/spelling in the counties table. Also, there are cases where no county info is available at all, and we can fix that manually as well.</p>
 <pre class="r"><code>zip2county &lt;- zip2county_raw %&gt;%
   mutate(
     # always spell city with capital C
@@ -443,11 +432,15 @@ zip2county_raw &lt;- reverse_zipcode(sprintf(&quot;%05i&quot;, 1:99999)) %&gt;%
       county == &quot;St Clair County&quot; &amp; state_code == &quot;AL&quot; ~ &quot;St. Clair County&quot;,
       county == &quot;Municipality of Anchorage&quot; &amp; state_code == &quot;AK&quot; ~ &quot;Anchorage Municipality&quot;,
       county == &quot;City and Borough of Juneau&quot; &amp; state_code == &quot;AK&quot; ~ &quot;Juneau City and Borough&quot;,
+      county == &quot;Desoto County&quot; &amp; state_code == &quot;FL&quot; ~ &quot;DeSoto County&quot;,
       county == &quot;Dekalb County&quot; &amp; state_code == &quot;GA&quot; ~ &quot;DeKalb County&quot;,
       county == &quot;Dupage County&quot; &amp; state_code == &quot;IL&quot; ~ &quot;DuPage County&quot;,
       county == &quot;Mchenry County&quot; &amp; state_code == &quot;IL&quot; ~ &quot;McHenry County&quot;,
       county == &quot;Mclean County&quot; &amp; state_code == &quot;IL&quot; ~ &quot;McLean County&quot;,
       county == &quot;La Salle County&quot; &amp; state_code == &quot;IL&quot; ~ &quot;LaSalle County&quot;,
+      county == &quot;La Porte County&quot; &amp; state_code == &quot;IN&quot; ~ &quot;LaPorte County&quot;,
+      county == &quot;Lagrange County&quot; &amp; state_code == &quot;IN&quot; ~ &quot;LaGrange County&quot;,
+      county == &quot;Mccracken County&quot; &amp; state_code == &quot;KY&quot; ~ &quot;McCracken County&quot;,
       county == &quot;St Bernard Parish&quot; &amp; state_code == &quot;LA&quot; ~ &quot;St. Bernard Parish&quot;,
       county == &quot;St Mary Parish&quot; &amp; state_code == &quot;LA&quot; ~ &quot;St. Mary Parish&quot;,
       county == &quot;St Tammany Parish&quot; &amp; state_code == &quot;LA&quot; ~ &quot;St. Tammany Parish&quot;,
@@ -456,16 +449,20 @@ zip2county_raw &lt;- reverse_zipcode(sprintf(&quot;%05i&quot;, 1:99999)) %&gt;%
       county == &quot;St James Parish&quot; &amp; state_code == &quot;LA&quot; ~ &quot;St. James Parish&quot;,
       county == &quot;La Salle Parish&quot; &amp; state_code == &quot;LA&quot; ~ &quot;LaSalle Parish&quot;,
       county == &quot;St Mary&#39;s County&quot; &amp; state_code == &quot;MD&quot; ~ &quot;St. Mary&#39;s County&quot;,
-      
       county == &quot;St Louis County&quot; &amp; state_code == &quot;MN&quot; ~ &quot;St. Louis County&quot;,
       county == &quot;St Louis County&quot; &amp; state_code == &quot;MO&quot; ~ &quot;St. Louis County&quot;,
       county == &quot;St Francois County&quot; &amp; state_code == &quot;MO&quot; ~ &quot;St. Francois County&quot;,
+      county == &quot;Dekalb County&quot; &amp; state_code == &quot;MO&quot; ~ &quot;DeKalb County&quot;,
+      county == &quot;Desoto County&quot; &amp; state_code == &quot;MS&quot; ~ &quot;DeSoto County&quot;,
       
+      county == &quot;Coös County&quot; &amp; state_code == &quot;NH&quot; ~ &quot;Coos County&quot;,
+
       county == &quot;Doa Ana County&quot; &amp; state_code == &quot;NM&quot; ~ &quot;Doña Ana County&quot;,
       county == &quot;Dona Ana County&quot; &amp; state_code == &quot;NM&quot; ~ &quot;Doña Ana County&quot;,
       county == &quot;Mckinley County&quot; &amp; state_code == &quot;NM&quot; ~ &quot;McKinley County&quot;,
       
       county == &quot;St Lawrence County&quot; &amp; state_code == &quot;NY&quot; ~ &quot;St. Lawrence County&quot;,
+      county == &quot;Mcminn County&quot; &amp; state_code == &quot;TN&quot; ~ &quot;McMinn County&quot;,
       
       county == &quot;Mclennan County&quot; &amp; state_code == &quot;TX&quot; ~ &quot;McLennan County&quot;,
       county == &quot;De Witt County&quot; &amp; state_code == &quot;TX&quot; ~ &quot;DeWitt County&quot;,
@@ -475,6 +472,29 @@ zip2county_raw &lt;- reverse_zipcode(sprintf(&quot;%05i&quot;, 1:99999)) %&gt;%
             
       county == &quot;San Juan County&quot; &amp; state_code == &quot;PR&quot; ~ &quot;San Juan Municipio&quot;,
       county == &quot;San Juan&quot; &amp; state_code == &quot;PR&quot; ~ &quot;San Juan Municipio&quot;,
+      county == &quot;Carolina Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Carolina Municipio&quot;,
+      county == &quot;Gunica Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Guánica Municipio&quot;,
+      county == &quot;Las Maras Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Las Marías Municipio&quot;,
+      county == &quot;Peuelas Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Peñuelas Municipio&quot;,
+      county == &quot;Bayamn Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Bayamón Municipio&quot;,
+      county == &quot;Bayamón&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Bayamón Municipio&quot;,
+      county == &quot;Catao Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Cataño Municipio&quot;,
+      county == &quot;Cataño&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Cataño Municipio&quot;,
+      county == &quot;Rincn Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Rincón Municipio&quot;,
+      county == &quot;Mayagez Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Mayagüez Municipio&quot;,
+      county == &quot;San Germn Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;San Germán Municipio&quot;,
+      county == &quot;San Sebastin Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;San Sebastián Municipio&quot;,
+      county == &quot;Canvanas Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Canóvanas Municipio&quot;,
+      county == &quot;Ro Grande Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Río Grande Municipio&quot;,
+
+      county == &quot;Manat Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Manatí Municipio&quot;,
+      county == &quot;Comero Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Comerío Municipio&quot;,
+      county == &quot;Juana Daz Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Juana Díaz Municipio&quot;,
+
+      county == &quot;Aasco Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Añasco Municipio&quot;,
+      county == &quot;Loza Municipio&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Loíza Municipio&quot;,
+      county == &quot;Toa Alta&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Toa Alta Municipio&quot;,
+      county == &quot;Carolina&quot; &amp; state_code == &quot;PR&quot; ~ &quot;Carolina Municipio&quot;,
 
       # now more complicated cases, regions that were renamed or otherwise changed
             
@@ -489,52 +509,102 @@ zip2county_raw &lt;- reverse_zipcode(sprintf(&quot;%05i&quot;, 1:99999)) %&gt;%
       # everything else carries over unchanged
       TRUE ~ county
     )
+  ) %&gt;%
+  mutate(
+    # fix up a few more cases manually that aren&#39;t correct in the raw database
+    county = case_when(
+      zipcode == &quot;99623&quot; ~ &quot;Matanuska-Susitna Borough&quot;,
+      zipcode == &quot;98189&quot; ~ &quot;King County&quot;,
+      zipcode == &quot;98082&quot; ~ &quot;Snohomish County&quot;,
+      zipcode == &quot;97475&quot; ~ &quot;Lane County&quot;,
+      zipcode == &quot;87547&quot; ~ &quot;Los Alamos County&quot;,
+      zipcode == &quot;84129&quot; ~ &quot;Salt Lake County&quot;,
+      zipcode == &quot;75033&quot; ~ &quot;Collin County&quot;, # (mostly, but partially in Denton County, TX)
+      #zipcode == &quot;73047&quot; ~ &quot;&quot; # spans multiple counties in OK
+      zipcode == &quot;72255&quot; ~ &quot;Pulaski County&quot;,
+      zipcode == &quot;68544&quot; ~ &quot;Lancaster County&quot;,
+      zipcode == &quot;64162&quot; ~ &quot;Clay County&quot;, # (may also be in Jackson County)
+      zipcode == &quot;60569&quot; ~ &quot;DuPage County&quot;,
+      zipcode == &quot;56999&quot; ~ &quot;District of Columbia&quot;,
+      zipcode == &quot;50983&quot; ~ &quot;Polk County&quot;,
+      zipcode == &quot;50982&quot; ~ &quot;Polk County&quot;,
+      zipcode == &quot;46213&quot; ~ &quot;Marion County&quot;,
+      zipcode == &quot;46210&quot; ~ &quot;Marion County&quot;,
+      zipcode == &quot;46197&quot; ~ &quot;Hendricks County&quot;,
+      zipcode == &quot;41025&quot; ~ &quot;Kenton County&quot;,
+      zipcode == &quot;41021&quot; ~ &quot;Boone County&quot;,
+      zipcode == &quot;40166&quot; ~ &quot;Bullitt County&quot;,
+      zipcode == &quot;35270&quot; ~ &quot;Jefferson County&quot;,
+      zipcode == &quot;34441&quot; ~ &quot;Citrus County&quot;,
+      zipcode == &quot;33206&quot; ~ &quot;Miami-Dade County&quot;,
+      zipcode == &quot;33198&quot; ~ &quot;Miami-Dade County&quot;,
+      zipcode == &quot;33192&quot; ~ &quot;Miami-Dade County&quot;,
+      zipcode == &quot;33191&quot; ~ &quot;Miami-Dade County&quot;,
+      zipcode == &quot;33106&quot; ~ &quot;Miami-Dade County&quot;,
+      zipcode == &quot;31144&quot; ~ &quot;Cobb County&quot;,
+      zipcode == &quot;30645&quot; ~ &quot;Oconee County&quot;,
+      zipcode == &quot;22350&quot; ~ &quot;Alexandria City&quot;,
+      zipcode == &quot;20417&quot; ~ &quot;District of Columbia&quot;,
+      TRUE ~ county
+    )
   )</code></pre>
-<p>Now we can join the two tables by county and state and see how many cases remain unresolved.</p>
+<p>Now we can join the two tables by county and state and write the final result.</p>
 <pre class="r"><code>zip2fips &lt;- zip2county %&gt;%
   left_join(counties, by = c(&quot;county&quot;, &quot;state_code&quot;)) %&gt;%
   select(zipcode, county, state, state_code, FIPS)
-
-unresolved &lt;- zip2fips %&gt;%
+write_csv(zip2fips, here(&quot;data&quot;, &quot;zip2fips.csv&quot;))</code></pre>
+<div id="unresolved-cases" class="section level2">
+<h2>Unresolved cases</h2>
+<p>The unresolved cases have <code>NA</code> in the <code>FIPS</code> column.</p>
+<pre class="r"><code>unresolved &lt;- zip2fips %&gt;%
   filter(is.na(FIPS))
 
 # number of unresolved cases
 nrow(unresolved)</code></pre>
-<pre><code>## [1] 137</code></pre>
+<pre><code>## [1] 67</code></pre>
+<p>All the remaining cases with county names have county-state mismatch. Many (all?) of these are zip codes that span state boundaries and the county is correct on one side while the state is correct on the other side.</p>
+<p>Example: 86044 spans Arizona and Utah, and the part on the Arizona side seems to be in Coconino County (according to Google).</p>
 <pre class="r"><code># unresolved cases with name
-filter(unresolved, county != &quot;&quot;)</code></pre>
-<pre><code>## # A tibble: 49 x 5
-##    zipcode county           state state_code FIPS 
-##    &lt;chr&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;
-##  1 86044   San Juan County  &lt;NA&gt;  AZ         &lt;NA&gt; 
-##  2 86515   McKinley County  &lt;NA&gt;  AZ         &lt;NA&gt; 
-##  3 34265   Desoto County    &lt;NA&gt;  FL         &lt;NA&gt; 
-##  4 34267   Desoto County    &lt;NA&gt;  FL         &lt;NA&gt; 
-##  5 30138   Cleburne County  &lt;NA&gt;  GA         &lt;NA&gt; 
-##  6 46352   La Porte County  &lt;NA&gt;  IN         &lt;NA&gt; 
-##  7 46361   La Porte County  &lt;NA&gt;  IN         &lt;NA&gt; 
-##  8 46789   Lagrange County  &lt;NA&gt;  IN         &lt;NA&gt; 
-##  9 42002   Mccracken County &lt;NA&gt;  KY         &lt;NA&gt; 
-## 10 21560   Mineral County   &lt;NA&gt;  MD         &lt;NA&gt; 
-## # … with 39 more rows</code></pre>
+unresolved_named &lt;- filter(unresolved, county != &quot;&quot;) %&gt;%
+  arrange(county) %&gt;%
+  select(zipcode, county, state_code)
+
+unresolved_named</code></pre>
+<pre><code>## # A tibble: 10 x 3
+##    zipcode county            state_code
+##    &lt;chr&gt;   &lt;chr&gt;             &lt;chr&gt;     
+##  1 30138   Cleburne County   GA        
+##  2 25685   Martin County     WV        
+##  3 24619   McDowell County   VA        
+##  4 86515   McKinley County   AZ        
+##  5 58439   McPherson County  ND        
+##  6 21560   Mineral County    MD        
+##  7 97635   Modoc County      OR        
+##  8 15439   Monongalia County PA        
+##  9 86044   San Juan County   AZ        
+## 10 25410   Washington County WV</code></pre>
+<p>The remaining cases without county names require manual look-up or may not exist anymore. I have manually reviewed everything except the ones in PR, and I could not locate the remaining ones outside of PR.</p>
 <pre class="r"><code># unresolved cases without name
-filter(unresolved, county == &quot;&quot;)</code></pre>
-<pre><code>## # A tibble: 88 x 5
-##    zipcode county state state_code FIPS 
-##    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;
-##  1 35270   &quot;&quot;     &lt;NA&gt;  AL         &lt;NA&gt; 
-##  2 99623   &quot;&quot;     &lt;NA&gt;  AK         &lt;NA&gt; 
-##  3 72255   &quot;&quot;     &lt;NA&gt;  AR         &lt;NA&gt; 
-##  4 95214   &quot;&quot;     &lt;NA&gt;  CA         &lt;NA&gt; 
-##  5 81075   &quot;&quot;     &lt;NA&gt;  CO         &lt;NA&gt; 
-##  6 33106   &quot;&quot;     &lt;NA&gt;  FL         &lt;NA&gt; 
-##  7 33191   &quot;&quot;     &lt;NA&gt;  FL         &lt;NA&gt; 
-##  8 33192   &quot;&quot;     &lt;NA&gt;  FL         &lt;NA&gt; 
-##  9 33198   &quot;&quot;     &lt;NA&gt;  FL         &lt;NA&gt; 
-## 10 33206   &quot;&quot;     &lt;NA&gt;  FL         &lt;NA&gt; 
-## # … with 78 more rows</code></pre>
-<p>Save output file.</p>
-<pre class="r"><code>write_csv(zip2fips, here(&quot;zip2fips.csv&quot;))</code></pre>
+unresolved_unnamed &lt;- filter(unresolved, county == &quot;&quot;) %&gt;%
+  arrange(desc(zipcode)) %&gt;%
+  select(zipcode, county, state_code)
+
+unresolved_unnamed</code></pre>
+<pre><code>## # A tibble: 57 x 3
+##    zipcode county state_code
+##    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     
+##  1 97252   &quot;&quot;     OR        
+##  2 97250   &quot;&quot;     OR        
+##  3 97129   &quot;&quot;     OR        
+##  4 97079   &quot;&quot;     OR        
+##  5 95214   &quot;&quot;     CA        
+##  6 87654   &quot;&quot;     NM        
+##  7 81075   &quot;&quot;     CO        
+##  8 76190   &quot;&quot;     TX        
+##  9 75064   &quot;&quot;     TX        
+## 10 73454   &quot;&quot;     OK        
+## # … with 47 more rows</code></pre>
+</div>
 
 
 

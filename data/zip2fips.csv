@@ -165,7 +165,7 @@ zipcode,county,state,state_code,FIPS
 35261,Jefferson County,Alabama,AL,01073
 35263,Jefferson County,Alabama,AL,01073
 35266,Jefferson County,Alabama,AL,01073
-35270,,NA,AL,NA
+35270,Jefferson County,Alabama,AL,01073
 35277,Jefferson County,Alabama,AL,01073
 35278,Jefferson County,Alabama,AL,01073
 35279,Jefferson County,Alabama,AL,01073
@@ -925,7 +925,7 @@ zipcode,county,state,state_code,FIPS
 99620,Kusilvak Census Area,Alaska,AK,02158
 99621,Bethel Census Area,Alaska,AK,02050
 99622,Bethel Census Area,Alaska,AK,02050
-99623,,NA,AK,NA
+99623,Matanuska-Susitna Borough,Alaska,AK,02170
 99624,Kodiak Island Borough,Alaska,AK,02150
 99625,Lake and Peninsula Borough,Alaska,AK,02164
 99626,Bethel Census Area,Alaska,AK,02050
@@ -2011,7 +2011,7 @@ zipcode,county,state,state_code,FIPS
 72225,Pulaski County,Arkansas,AR,05119
 72227,Pulaski County,Arkansas,AR,05119
 72231,Pulaski County,Arkansas,AR,05119
-72255,,NA,AR,NA
+72255,Pulaski County,Arkansas,AR,05119
 72260,Pulaski County,Arkansas,AR,05119
 72295,Pulaski County,Arkansas,AR,05119
 72301,Crittenden County,Arkansas,AR,05035
@@ -6916,7 +6916,7 @@ zipcode,county,state,state_code,FIPS
 33097,Broward County,Florida,FL,12011
 33101,Miami-Dade County,Florida,FL,12086
 33102,Miami-Dade County,Florida,FL,12086
-33106,,NA,FL,NA
+33106,Miami-Dade County,Florida,FL,12086
 33107,Miami-Dade County,Florida,FL,12086
 33109,Miami-Dade County,Florida,FL,12086
 33110,Miami-Dade County,Florida,FL,12086
@@ -6993,16 +6993,16 @@ zipcode,county,state,state_code,FIPS
 33188,Miami-Dade County,Florida,FL,12086
 33189,Miami-Dade County,Florida,FL,12086
 33190,Miami-Dade County,Florida,FL,12086
-33191,,NA,FL,NA
-33192,,NA,FL,NA
+33191,Miami-Dade County,Florida,FL,12086
+33192,Miami-Dade County,Florida,FL,12086
 33193,Miami-Dade County,Florida,FL,12086
 33194,Miami-Dade County,Florida,FL,12086
 33195,Miami-Dade County,Florida,FL,12086
 33196,Miami-Dade County,Florida,FL,12086
 33197,Miami-Dade County,Florida,FL,12086
-33198,,NA,FL,NA
+33198,Miami-Dade County,Florida,FL,12086
 33199,Miami-Dade County,Florida,FL,12086
-33206,,NA,FL,NA
+33206,Miami-Dade County,Florida,FL,12086
 33222,Miami-Dade County,Florida,FL,12086
 33231,Miami-Dade County,Florida,FL,12086
 33233,Miami-Dade County,Florida,FL,12086
@@ -7544,9 +7544,9 @@ zipcode,county,state,state_code,FIPS
 34251,Manatee County,Florida,FL,12081
 34260,Sarasota County,Florida,FL,12115
 34264,Manatee County,Florida,FL,12081
-34265,Desoto County,NA,FL,NA
+34265,DeSoto County,Florida,FL,12027
 34266,DeSoto County,Florida,FL,12027
-34267,Desoto County,NA,FL,NA
+34267,DeSoto County,Florida,FL,12027
 34268,DeSoto County,Florida,FL,12027
 34269,DeSoto County,Florida,FL,12027
 34270,Manatee County,Florida,FL,12081
@@ -7581,7 +7581,7 @@ zipcode,county,state,state_code,FIPS
 34433,Citrus County,Florida,FL,12017
 34434,Citrus County,Florida,FL,12017
 34436,Citrus County,Florida,FL,12017
-34441,,NA,FL,NA
+34441,Citrus County,Florida,FL,12017
 34442,Citrus County,Florida,FL,12017
 34445,Citrus County,Florida,FL,12017
 34446,Citrus County,Florida,FL,12017
@@ -8204,7 +8204,7 @@ zipcode,county,state,state_code,FIPS
 30641,Walton County,Georgia,GA,13297
 30642,Greene County,Georgia,GA,13133
 30643,Hart County,Georgia,GA,13147
-30645,,NA,GA,NA
+30645,Oconee County,Georgia,GA,13219
 30646,Madison County,Georgia,GA,13195
 30647,Madison County,Georgia,GA,13195
 30648,Oglethorpe County,Georgia,GA,13221
@@ -8403,7 +8403,7 @@ zipcode,county,state,state_code,FIPS
 31136,Fulton County,Georgia,GA,13121
 31139,Fulton County,Georgia,GA,13121
 31141,Fulton County,Georgia,GA,13121
-31144,,NA,GA,NA
+31144,Cobb County,Georgia,GA,13067
 31145,Fulton County,Georgia,GA,13121
 31146,Fulton County,Georgia,GA,13121
 31150,Fulton County,Georgia,GA,13121
@@ -9504,7 +9504,7 @@ zipcode,county,state,state_code,FIPS
 60566,DuPage County,Illinois,IL,17043
 60567,DuPage County,Illinois,IL,17043
 60568,Kane County,Illinois,IL,17089
-60569,,NA,IL,NA
+60569,DuPage County,Illinois,IL,17043
 60570,DuPage County,Illinois,IL,17043
 60572,Kane County,Illinois,IL,17089
 60585,Will County,Illinois,IL,17197
@@ -10878,7 +10878,7 @@ zipcode,county,state,state_code,FIPS
 46183,Marion County,Indiana,IN,18097
 46184,Johnson County,Indiana,IN,18081
 46186,Hancock County,Indiana,IN,18059
-46197,,NA,IN,NA
+46197,Hendricks County,Indiana,IN,18063
 46201,Marion County,Indiana,IN,18097
 46202,Marion County,Indiana,IN,18097
 46203,Marion County,Indiana,IN,18097
@@ -10888,9 +10888,9 @@ zipcode,county,state,state_code,FIPS
 46207,Marion County,Indiana,IN,18097
 46208,Marion County,Indiana,IN,18097
 46209,Marion County,Indiana,IN,18097
-46210,,NA,IN,NA
+46210,Marion County,Indiana,IN,18097
 46211,Marion County,Indiana,IN,18097
-46213,,NA,IN,NA
+46213,Marion County,Indiana,IN,18097
 46214,Marion County,Indiana,IN,18097
 46216,Marion County,Indiana,IN,18097
 46217,Marion County,Indiana,IN,18097
@@ -10970,11 +10970,11 @@ zipcode,county,state,state_code,FIPS
 46348,LaPorte County,Indiana,IN,18091
 46349,Newton County,Indiana,IN,18111
 46350,LaPorte County,Indiana,IN,18091
-46352,La Porte County,NA,IN,NA
+46352,LaPorte County,Indiana,IN,18091
 46355,Lake County,Indiana,IN,18089
 46356,Lake County,Indiana,IN,18089
 46360,LaPorte County,Indiana,IN,18091
-46361,La Porte County,NA,IN,NA
+46361,LaPorte County,Indiana,IN,18091
 46365,LaPorte County,Indiana,IN,18091
 46366,Starke County,Indiana,IN,18149
 46368,Porter County,Indiana,IN,18127
@@ -11134,7 +11134,7 @@ zipcode,county,state,state_code,FIPS
 46786,LaGrange County,Indiana,IN,18087
 46787,Whitley County,Indiana,IN,18183
 46788,Allen County,Indiana,IN,18003
-46789,Lagrange County,NA,IN,NA
+46789,LaGrange County,Indiana,IN,18087
 46791,Wells County,Indiana,IN,18179
 46792,Huntington County,Indiana,IN,18069
 46793,DeKalb County,Indiana,IN,18033
@@ -12256,8 +12256,8 @@ zipcode,county,state,state_code,FIPS
 50950,Polk County,Iowa,IA,19153
 50980,Polk County,Iowa,IA,19153
 50981,Polk County,Iowa,IA,19153
-50982,,NA,IA,NA
-50983,,NA,IA,NA
+50982,Polk County,Iowa,IA,19153
+50983,Polk County,Iowa,IA,19153
 51001,Plymouth County,Iowa,IA,19149
 51002,Buena Vista County,Iowa,IA,19021
 51003,Sioux County,Iowa,IA,19167
@@ -13658,7 +13658,7 @@ zipcode,county,state,state_code,FIPS
 40161,Meade County,Kentucky,KY,21163
 40162,Hardin County,Kentucky,KY,21093
 40165,Bullitt County,Kentucky,KY,21029
-40166,,NA,KY,NA
+40166,Bullitt County,Kentucky,KY,21029
 40170,Breckinridge County,Kentucky,KY,21027
 40171,Breckinridge County,Kentucky,KY,21027
 40175,Hardin County,Kentucky,KY,21093
@@ -13973,9 +13973,9 @@ zipcode,county,state,state_code,FIPS
 41017,Kenton County,Kentucky,KY,21117
 41018,Kenton County,Kentucky,KY,21117
 41019,Kenton County,Kentucky,KY,21117
-41021,,NA,KY,NA
+41021,Boone County,Kentucky,KY,21015
 41022,Boone County,Kentucky,KY,21015
-41025,,NA,KY,NA
+41025,Kenton County,Kentucky,KY,21117
 41030,Grant County,Kentucky,KY,21081
 41031,Harrison County,Kentucky,KY,21097
 41033,Pendleton County,Kentucky,KY,21191
@@ -14271,7 +14271,7 @@ zipcode,county,state,state_code,FIPS
 41861,Knott County,Kentucky,KY,21119
 41862,Knott County,Kentucky,KY,21119
 42001,McCracken County,Kentucky,KY,21145
-42002,Mccracken County,NA,KY,NA
+42002,McCracken County,Kentucky,KY,21145
 42003,McCracken County,Kentucky,KY,21145
 42020,Calloway County,Kentucky,KY,21035
 42021,Carlisle County,Kentucky,KY,21039
@@ -19343,7 +19343,7 @@ zipcode,county,state,state_code,FIPS
 38680,DeSoto County,Mississippi,MS,28033
 38683,Tippah County,Mississippi,MS,28139
 38685,Marshall County,Mississippi,MS,28093
-38686,Desoto County,NA,MS,NA
+38686,DeSoto County,Mississippi,MS,28033
 38701,Washington County,Mississippi,MS,28151
 38702,Bolivar County,Mississippi,MS,28011
 38703,Washington County,Mississippi,MS,28151
@@ -20353,7 +20353,7 @@ zipcode,county,state,state_code,FIPS
 64157,Clay County,Missouri,MO,29047
 64158,Clay County,Missouri,MO,29047
 64161,Clay County,Missouri,MO,29047
-64162,,NA,MO,NA
+64162,Clay County,Missouri,MO,29047
 64163,Platte County,Missouri,MO,29165
 64164,Platte County,Missouri,MO,29165
 64165,Clay County,Missouri,MO,29047
@@ -20407,7 +20407,7 @@ zipcode,county,state,state_code,FIPS
 64444,Platte County,Missouri,MO,29165
 64445,Nodaway County,Missouri,MO,29147
 64446,Atchison County,Missouri,MO,29005
-64447,Dekalb County,NA,MO,NA
+64447,DeKalb County,Missouri,MO,29063
 64448,Buchanan County,Missouri,MO,29021
 64449,Andrew County,Missouri,MO,29003
 64451,Holt County,Missouri,MO,29087
@@ -21654,7 +21654,7 @@ zipcode,county,state,state_code,FIPS
 68531,Lancaster County,Nebraska,NE,31109
 68532,Lancaster County,Nebraska,NE,31109
 68542,Lancaster County,Nebraska,NE,31109
-68544,,NA,NE,NA
+68544,Lancaster County,Nebraska,NE,31109
 68583,Lancaster County,Nebraska,NE,31109
 68588,Lancaster County,Nebraska,NE,31109
 68601,Platte County,Nebraska,NE,31141
@@ -22428,7 +22428,7 @@ zipcode,county,state,state_code,FIPS
 03585,Grafton County,New Hampshire,NH,33009
 03586,Grafton County,New Hampshire,NH,33009
 03588,Coos County,New Hampshire,NH,33007
-03589,Coös County,NA,NH,NA
+03589,Coos County,New Hampshire,NH,33007
 03590,Coos County,New Hampshire,NH,33007
 03592,Coos County,New Hampshire,NH,33007
 03593,Coos County,New Hampshire,NH,33007
@@ -23466,7 +23466,7 @@ zipcode,county,state,state_code,FIPS
 87543,Taos County,New Mexico,NM,35055
 87544,Los Alamos County,New Mexico,NM,35028
 87545,Los Alamos County,New Mexico,NM,35028
-87547,,NA,NM,NA
+87547,Los Alamos County,New Mexico,NM,35028
 87548,Rio Arriba County,New Mexico,NM,35039
 87549,Rio Arriba County,New Mexico,NM,35039
 87551,Rio Arriba County,New Mexico,NM,35039
@@ -29956,7 +29956,7 @@ zipcode,county,state,state_code,FIPS
 97471,Douglas County,Oregon,OR,41019
 97472,Lane County,Oregon,OR,41039
 97473,Douglas County,Oregon,OR,41019
-97475,,NA,OR,NA
+97475,Lane County,Oregon,OR,41039
 97476,Curry County,Oregon,OR,41015
 97477,Lane County,Oregon,OR,41039
 97478,Lane County,Oregon,OR,41039
@@ -32350,7 +32350,7 @@ zipcode,county,state,state_code,FIPS
 00604,,NA,PR,NA
 00605,,NA,PR,NA
 00606,Maricao Municipio,Puerto Rico,PR,72093
-00610,Aasco Municipio,NA,PR,NA
+00610,Añasco Municipio,Puerto Rico,PR,72011
 00611,,NA,PR,NA
 00612,Arecibo Municipio,Puerto Rico,PR,72013
 00613,,NA,PR,NA
@@ -32359,7 +32359,7 @@ zipcode,county,state,state_code,FIPS
 00617,Barceloneta Municipio,Puerto Rico,PR,72017
 00622,Cabo Rojo Municipio,Puerto Rico,PR,72023
 00623,Cabo Rojo Municipio,Puerto Rico,PR,72023
-00624,Peuelas Municipio,NA,PR,NA
+00624,Peñuelas Municipio,Puerto Rico,PR,72111
 00627,Camuy Municipio,Puerto Rico,PR,72027
 00631,Lares Municipio,Puerto Rico,PR,72081
 00636,,NA,PR,NA
@@ -32367,10 +32367,10 @@ zipcode,county,state,state_code,FIPS
 00638,Ciales Municipio,Puerto Rico,PR,72039
 00641,Utuado Municipio,Puerto Rico,PR,72141
 00646,Dorado Municipio,Puerto Rico,PR,72051
-00647,Gunica Municipio,NA,PR,NA
+00647,Guánica Municipio,Puerto Rico,PR,72055
 00650,Florida Municipio,Puerto Rico,PR,72054
 00652,Arecibo Municipio,Puerto Rico,PR,72013
-00653,Gunica Municipio,NA,PR,NA
+00653,Guánica Municipio,Puerto Rico,PR,72055
 00656,Guayanilla Municipio,Puerto Rico,PR,72059
 00659,Hatillo Municipio,Puerto Rico,PR,72065
 00660,Hormigueros Municipio,Puerto Rico,PR,72067
@@ -32378,16 +32378,16 @@ zipcode,county,state,state_code,FIPS
 00664,Jayuya Municipio,Puerto Rico,PR,72073
 00667,Lajas Municipio,Puerto Rico,PR,72079
 00669,Lares Municipio,Puerto Rico,PR,72081
-00670,Las Maras Municipio,NA,PR,NA
-00674,Manat Municipio,NA,PR,NA
+00670,Las Marías Municipio,Puerto Rico,PR,72083
+00674,Manatí Municipio,Puerto Rico,PR,72091
 00676,Moca Municipio,Puerto Rico,PR,72099
-00677,Rincn Municipio,NA,PR,NA
+00677,Rincón Municipio,Puerto Rico,PR,72117
 00678,Quebradillas Municipio,Puerto Rico,PR,72115
-00680,Mayagez Municipio,NA,PR,NA
+00680,Mayagüez Municipio,Puerto Rico,PR,72097
 00681,,NA,PR,NA
-00682,Mayagez Municipio,NA,PR,NA
-00683,San Germn Municipio,NA,PR,NA
-00685,San Sebastin Municipio,NA,PR,NA
+00682,Mayagüez Municipio,Puerto Rico,PR,72097
+00683,San Germán Municipio,Puerto Rico,PR,72125
+00685,San Sebastián Municipio,Puerto Rico,PR,72131
 00687,Morovis Municipio,Puerto Rico,PR,72101
 00688,Arecibo Municipio,Puerto Rico,PR,72013
 00690,Aguadilla Municipio,Puerto Rico,PR,72005
@@ -32412,7 +32412,7 @@ zipcode,county,state,state_code,FIPS
 00726,,NA,PR,NA
 00727,Caguas Municipio,Puerto Rico,PR,72025
 00728,Ponce Municipio,Puerto Rico,PR,72113
-00729,Canvanas Municipio,NA,PR,NA
+00729,Canóvanas Municipio,Puerto Rico,PR,72029
 00730,Ponce Municipio,Puerto Rico,PR,72113
 00731,Ponce Municipio,Puerto Rico,PR,72113
 00732,,NA,PR,NA
@@ -32427,7 +32427,7 @@ zipcode,county,state,state_code,FIPS
 00741,Humacao Municipio,Puerto Rico,PR,72069
 00742,,NA,PR,NA
 00744,,NA,PR,NA
-00745,Ro Grande Municipio,NA,PR,NA
+00745,Río Grande Municipio,Puerto Rico,PR,72119
 00751,Salinas Municipio,Puerto Rico,PR,72123
 00754,San Lorenzo Municipio,Puerto Rico,PR,72129
 00757,Santa Isabel Municipio,Puerto Rico,PR,72133
@@ -32436,13 +32436,13 @@ zipcode,county,state,state_code,FIPS
 00767,Yabucoa Municipio,Puerto Rico,PR,72151
 00769,Coamo Municipio,Puerto Rico,PR,72043
 00771,Las Piedras Municipio,Puerto Rico,PR,72085
-00772,Loza Municipio,NA,PR,NA
+00772,Loíza Municipio,Puerto Rico,PR,72087
 00773,Luquillo Municipio,Puerto Rico,PR,72089
 00775,Culebra Municipio,Puerto Rico,PR,72049
 00777,Juncos Municipio,Puerto Rico,PR,72077
 00778,Gurabo Municipio,Puerto Rico,PR,72063
 00780,Ponce Municipio,Puerto Rico,PR,72113
-00782,Comero Municipio,NA,PR,NA
+00782,Comerío Municipio,Puerto Rico,PR,72045
 00783,Corozal Municipio,Puerto Rico,PR,72047
 00784,Guayama Municipio,Puerto Rico,PR,72057
 00785,,NA,PR,NA
@@ -32450,7 +32450,7 @@ zipcode,county,state,state_code,FIPS
 00791,Humacao Municipio,Puerto Rico,PR,72069
 00792,,NA,PR,NA
 00794,Barranquitas Municipio,Puerto Rico,PR,72019
-00795,Juana Daz Municipio,NA,PR,NA
+00795,Juana Díaz Municipio,Puerto Rico,PR,72075
 00901,San Juan Municipio,Puerto Rico,PR,72127
 00902,,NA,PR,NA
 00906,San Juan Municipio,Puerto Rico,PR,72127
@@ -32491,16 +32491,16 @@ zipcode,county,state,state_code,FIPS
 00951,Toa Baja Municipio,Puerto Rico,PR,72137
 00952,Toa Baja Municipio,Puerto Rico,PR,72137
 00953,Toa Alta Municipio,Puerto Rico,PR,72135
-00954,Toa Alta,NA,PR,NA
+00954,Toa Alta Municipio,Puerto Rico,PR,72135
 00955,San Juan Municipio,Puerto Rico,PR,72127
-00956,Bayamn Municipio,NA,PR,NA
-00957,Bayamn Municipio,NA,PR,NA
-00958,Bayamón,NA,PR,NA
-00959,Bayamn Municipio,NA,PR,NA
-00960,Bayamn Municipio,NA,PR,NA
-00961,Bayamn Municipio,NA,PR,NA
-00962,Catao Municipio,NA,PR,NA
-00963,Cataño,NA,PR,NA
+00956,Bayamón Municipio,Puerto Rico,PR,72021
+00957,Bayamón Municipio,Puerto Rico,PR,72021
+00958,Bayamón Municipio,Puerto Rico,PR,72021
+00959,Bayamón Municipio,Puerto Rico,PR,72021
+00960,Bayamón Municipio,Puerto Rico,PR,72021
+00961,Bayamón Municipio,Puerto Rico,PR,72021
+00962,Cataño Municipio,Puerto Rico,PR,72033
+00963,Cataño Municipio,Puerto Rico,PR,72033
 00965,Guaynabo Municipio,Puerto Rico,PR,72061
 00966,Guaynabo Municipio,Puerto Rico,PR,72061
 00968,Guaynabo Municipio,Puerto Rico,PR,72061
@@ -32512,14 +32512,14 @@ zipcode,county,state,state_code,FIPS
 00977,,NA,PR,NA
 00978,San Juan Municipio,Puerto Rico,PR,72127
 00979,Carolina Municipio,Puerto Rico,PR,72031
-00981,Carolina,NA,PR,NA
+00981,Carolina Municipio,Puerto Rico,PR,72031
 00982,Carolina Municipio,Puerto Rico,PR,72031
 00983,Carolina Municipio,Puerto Rico,PR,72031
-00984,Carolina,NA,PR,NA
+00984,Carolina Municipio,Puerto Rico,PR,72031
 00985,Carolina Municipio,Puerto Rico,PR,72031
-00986,Carolina,NA,PR,NA
+00986,Carolina Municipio,Puerto Rico,PR,72031
 00987,Carolina Municipio,Puerto Rico,PR,72031
-00988,Carolina,NA,PR,NA
+00988,Carolina Municipio,Puerto Rico,PR,72031
 02801,Newport County,Rhode Island,RI,44005
 02802,Providence County,Rhode Island,RI,44007
 02804,Washington County,Rhode Island,RI,44009
@@ -33788,7 +33788,7 @@ zipcode,county,state,state_code,FIPS
 37367,Bledsoe County,Tennessee,TN,47007
 37369,Polk County,Tennessee,TN,47139
 37370,McMinn County,Tennessee,TN,47107
-37371,Mcminn County,NA,TN,NA
+37371,McMinn County,Tennessee,TN,47107
 37373,Hamilton County,Tennessee,TN,47065
 37374,Marion County,Tennessee,TN,47115
 37375,Franklin County,Tennessee,TN,47051
@@ -34369,7 +34369,7 @@ zipcode,county,state,state_code,FIPS
 75029,Denton County,Texas,TX,48121
 75030,Dallas County,Texas,TX,48113
 75032,Rockwall County,Texas,TX,48397
-75033,,NA,TX,NA
+75033,Collin County,Texas,TX,48085
 75034,Denton County,Texas,TX,48121
 75035,Collin County,Texas,TX,48085
 75037,Dallas County,Texas,TX,48113
@@ -37120,7 +37120,7 @@ zipcode,county,state,state_code,FIPS
 84126,Salt Lake County,Utah,UT,49035
 84127,Salt Lake County,Utah,UT,49035
 84128,Salt Lake County,Utah,UT,49035
-84129,,NA,UT,NA
+84129,Salt Lake County,Utah,UT,49035
 84130,Salt Lake County,Utah,UT,49035
 84131,Salt Lake County,Utah,UT,49035
 84132,Salt Lake County,Utah,UT,49035
@@ -37867,7 +37867,7 @@ zipcode,county,state,state_code,FIPS
 22333,Alexandria City,Virginia,VA,51510
 22334,Alexandria City,Virginia,VA,51510
 22336,Alexandria City,Virginia,VA,51510
-22350,,NA,VA,NA
+22350,Alexandria City,Virginia,VA,51510
 22401,Fredericksburg City,Virginia,VA,51630
 22402,Fredericksburg City,Virginia,VA,51630
 22403,Fredericksburg City,Virginia,VA,51630
@@ -38963,7 +38963,7 @@ zipcode,county,state,state_code,FIPS
 98074,King County,Washington,WA,53033
 98075,King County,Washington,WA,53033
 98077,King County,Washington,WA,53033
-98082,,NA,WA,NA
+98082,Snohomish County,Washington,WA,53061
 98083,King County,Washington,WA,53033
 98087,Snohomish County,Washington,WA,53061
 98089,King County,Washington,WA,53033
@@ -39027,7 +39027,7 @@ zipcode,county,state,state_code,FIPS
 98184,King County,Washington,WA,53033
 98185,King County,Washington,WA,53033
 98188,King County,Washington,WA,53033
-98189,,NA,WA,NA
+98189,King County,Washington,WA,53033
 98190,King County,Washington,WA,53033
 98191,King County,Washington,WA,53033
 98194,King County,Washington,WA,53033
@@ -39804,7 +39804,7 @@ zipcode,county,state,state_code,FIPS
 20414,District of Columbia,District of Columbia,DC,11001
 20415,District of Columbia,District of Columbia,DC,11001
 20416,District of Columbia,District of Columbia,DC,11001
-20417,,NA,DC,NA
+20417,District of Columbia,District of Columbia,DC,11001
 20418,District of Columbia,District of Columbia,DC,11001
 20419,District of Columbia,District of Columbia,DC,11001
 20420,District of Columbia,District of Columbia,DC,11001
@@ -39925,7 +39925,7 @@ zipcode,county,state,state_code,FIPS
 56967,,NA,DC,NA
 56972,District of Columbia,District of Columbia,DC,11001
 56998,,NA,DC,NA
-56999,,NA,DC,NA
+56999,District of Columbia,District of Columbia,DC,11001
 24701,Mercer County,West Virginia,WV,54055
 24712,Mercer County,West Virginia,WV,54055
 24714,Mercer County,West Virginia,WV,54055
